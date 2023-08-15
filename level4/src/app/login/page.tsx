@@ -1,6 +1,6 @@
 'use client';
 
-import {ChangeEvent, FormEvent, useState} from 'react';
+import {type ChangeEvent, type FormEvent, useState} from 'react';
 import axios from 'axios';
 import {useRouter} from 'next/navigation';
 

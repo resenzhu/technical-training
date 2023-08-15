@@ -1,25 +1,41 @@
 'use client';
 
 import {Dialog, Transition} from '@headlessui/react';
-import {ChangeEvent, FormEvent, Fragment, useEffect, useState} from 'react';
+import {
+  type ChangeEvent,
+  type FormEvent,
+  Fragment,
+  useEffect,
+  useState
+} from 'react';
 import {DateTime} from 'luxon';
 import axios from 'axios';
+
+type Employee = {
+  id: number;
+  name: string;
+  dob: string;
+  status: string;
+  address: string;
+  nik: string;
+  npwp: string;
+};
 
 const Page = (): JSX.Element => {
   const [showAdd, setShowAdd] = useState<boolean>(false);
   const [showView, setShowView] = useState<boolean>(false);
   const [showEdit, setShowEdit] = useState<boolean>(false);
   const [showDelete, setShowDelete] = useState<boolean>(false);
-  const [employee, setEmployee] = useState<{
-    id: number;
-    name: string;
-    dob: string;
-    status: string;
-    address: string;
-    nik: string;
-    npwp: string;
-  }>({id: 0, name: '', dob: '', status: '', address: '', nik: '', npwp: ''});
-  const [employees, setEmployees] = useState<(typeof employee)[]>([]);
+  const [employee, setEmployee] = useState<Employee>({
+    id: 0,
+    name: '',
+    dob: '',
+    status: '',
+    address: '',
+    nik: '',
+    npwp: ''
+  });
+  const [employees, setEmployees] = useState<Employee[]>([]);
 
   const handleToggleAdd = (show: boolean): void => {
     setShowAdd(show);
@@ -116,7 +132,7 @@ const Page = (): JSX.Element => {
       .then((response): void => {
         if (response.data.message === 'Success') {
           setEmployees(
-            employees.map((emp): typeof employee => {
+            employees.map((emp): Employee => {
               if (emp.id === response.data.data.id) {
                 emp = {
                   ...emp,

@@ -1,6 +1,6 @@
 'use client';
 
-import {FormEvent} from 'react';
+import type {FormEvent} from 'react';
 import {useRouter} from 'next/navigation';
 
 const Page = (): JSX.Element => {
